@@ -7,14 +7,24 @@ $(document).ready(function(){
 
   $(rettangolo).click(
     function() {
-      var rettangonoCliccato = $(this);
+      var rettangoloCliccato = $(this);
       $.ajax({
         url : "https://flynn.boolean.careers/exercises/api/random/int",
         method : "GET",
         success: function (data,stato) {
-          rettangonoCliccato.html("<h1><b> " + data.response + " </b></h1>");
+          var numeroRandom = data.response;
+          rettangoloCliccato.html("<h1><b> " + numeroRandom + " </b></h1>");
+          if (numeroRandom <= 5) {
+            rettangoloCliccato.css(
+              "background-color", "yellow"
+            );
+          } else if (numeroRandom > 5) {
+            rettangoloCliccato.css(
+              "background-color", "green"
+            );
+          }
         },
-        error : function (richiesta, stato, errori) {
+        error : function (richiesta, stato, errore) {
           alert("E' avvenuto un errore. " + errore);
         }
       });
